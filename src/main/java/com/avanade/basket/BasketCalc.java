@@ -1,32 +1,29 @@
 package com.avanade.basket;
 
-import java.util.Map;
-import java.util.stream.Stream;
+import io.vavr.Tuple2;
 
-import static java.util.function.Function.*;
-import static java.util.stream.Collectors.*;
+import static io.vavr.API.Array;
+import static io.vavr.API.Tuple;
 
 public class BasketCalc {
 
+
     public long calculatePrice(String[] args) {
-        return Stream.of(args)
-                .map(Items::valueOf) // <- this will cover most basic validation without too much overhead
-                .collect(groupingBy(identity(), counting()))
-                .entrySet()
-                .stream()
-                .mapToLong(this::priceForItem)
-                .sum();
+        return Array(args)
+                .map(Items::valueOf)
+                .groupBy(item -> item)
+                .map(t -> Tuple(t._1, t._2.length()))
+                .map(this::priceForItem2)
+                .sum().longValue();
     }
 
-    private long priceForItem(Map.Entry<Items, Long> tuple) {
-        Items item = tuple.getKey();
-        long quantityTotal = tuple.getValue();
+    private long priceForItem2(Tuple2<Items, Integer> tuple) {
+        Items item = tuple._1;
 
-        long quantityBase = item.getBase() * (quantityTotal / item.getRequiredForSingleDiscount());
-        long quantityRest = quantityTotal % item.getRequiredForSingleDiscount();
+        long quantityBase = item.getBase() * (tuple._2 / item.getRequiredForSingleDiscount());
+        long quantityRest = tuple._2 % item.getRequiredForSingleDiscount();
 
         long quantityToPrice = quantityBase + quantityRest;
         return quantityToPrice * item.getPrice();
     }
-
 }
