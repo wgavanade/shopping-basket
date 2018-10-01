@@ -8,7 +8,7 @@ import org.junit.runners.Parameterized;
 import java.util.Arrays;
 import java.util.Collection;
 
-import static org.junit.Assert.*;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @RunWith(Parameterized.class)
 public class BasketCalcTest {
@@ -74,6 +74,6 @@ public class BasketCalcTest {
         long computedPrice = basketCalc.calculatePrice(items);
 
         // Then
-        assertEquals(expectedPrice, computedPrice);
+        assertThat(computedPrice).isEqualTo(expectedPrice);
     }
 }
