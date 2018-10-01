@@ -53,7 +53,15 @@ public class BasketCalcTest {
                 {new String[]{"Lime", "Lime", "Lime", "Lime"}, 45L},
                 {new String[]{"Lime", "Lime", "Lime", "Lime", "Lime"}, 60L},
                 {new String[]{"Lime", "Lime", "Lime", "Lime", "Lime", "Lime"}, 60L},
-                {new String[]{"Lime", "Lime", "Lime", "Lime", "Lime", "Lime", "Lime"}, 75L}
+                {new String[]{"Lime", "Lime", "Lime", "Lime", "Lime", "Lime", "Lime"}, 75L},
+
+                {new String[]{"Apple", "Banana", "Melon", "Lime"}, 120L},
+                {new String[]{"Apple", "Apple", "Banana", "Melon", "Lime"}, 155L},
+                {new String[]{"Apple", "Banana", "Banana", "Melon", "Lime"}, 140L},
+                {new String[]{"Apple", "Banana", "Melon", "Lime", "Lime", "Lime", "Lime"}, 150L},
+                {new String[]{"Apple", "Banana", "Melon", "Melon", "Melon", "Melon", "Melon", "Lime", "Lime", "Lime", "Lime"}, 250L},
+                {new String[]{"Apple", "Banana", "Banana", "Banana", "Melon", "Melon", "Melon", "Melon", "Melon", "Lime", "Lime", "Lime", "Lime"}, 290L},
+                {new String[]{"Apple", "Apple", "Apple", "Banana", "Banana", "Banana", "Melon", "Melon", "Melon", "Melon", "Melon", "Lime", "Lime", "Lime", "Lime"}, 360L},
         };
         return Arrays.asList(data);
     }

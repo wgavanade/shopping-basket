@@ -1,16 +1,17 @@
 package com.avanade.basket;
 
 import java.util.Map;
-import java.util.function.Function;
-import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import static java.util.function.Function.*;
+import static java.util.stream.Collectors.*;
 
 public class BasketCalc {
 
     public long calculatePrice(String[] args) {
         return Stream.of(args)
-                .map(Items::valueOf)
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+                .map(Items::valueOf) // <- this will cover most basic validation without too much overhead
+                .collect(groupingBy(identity(), counting()))
                 .entrySet()
                 .stream()
                 .mapToLong(this::priceForItem)
